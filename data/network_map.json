@@ -1,0 +1,31 @@
+{
+  "nodes": [
+    {"id": "EXT-INTERNET", "type": "ExternalAsset", "os": "Linux", "edr_telemetry_cost": 0.0},
+    {"id": "DMZ-WEB-01", "type": "Server_DMZ", "os": "Ubuntu 24.04", "edr_telemetry_cost": 2.5},
+    {"id": "DMZ-PROXY-02", "type": "Server_DMZ", "os": "RHEL 9", "edr_telemetry_cost": 3.0},
+    {"id": "COMP-LAN-101", "type": "Workstation", "os": "Windows 11", "edr_telemetry_cost": 2.0},
+    {"id": "COMP-LAN-102", "type": "Workstation", "os": "Windows 10", "edr_telemetry_cost": 1.5},
+    {"id": "SRV-HR-DATA", "type": "Server_LAN", "os": "Windows Server 2022", "edr_telemetry_cost": 5.0},
+    {"id": "SRV-SQL-PROD", "type": "Server_LAN", "os": "Windows Server 2022", "edr_telemetry_cost": 6.5},
+    {"id": "MGMT-JUMP-01", "type": "Server_Tier1", "os": "Windows Server 2025", "edr_telemetry_cost": 8.0},
+    {"id": "MGMT-LINUX-02", "type": "Server_Tier1", "os": "Debian 12", "edr_telemetry_cost": 7.0},
+    {"id": "DC-PRIMARY-01", "type": "DomainController_Tier0", "os": "Windows Server 2025", "edr_telemetry_cost": 10.0},
+    {"id": "DC-BACKUP-02", "type": "DomainController_Tier0", "os": "Windows Server 2022", "edr_telemetry_cost": 9.5},
+    {"id": "OFFLINE-VAULT", "type": "CrownJewel", "os": "Custom_OS", "edr_telemetry_cost": 12.0}
+  ],
+  "edges": [
+    {"source": "EXT-INTERNET", "target": "DMZ-WEB-01", "relation": "Public_Exploit", "base_risk": 4.0, "required_os": "Linux", "required_token": "None"},
+    {"source": "EXT-INTERNET", "target": "DMZ-PROXY-02", "relation": "Misconfig_Bypass", "base_risk": 5.5, "required_os": "Linux", "required_token": "None"},
+    {"source": "DMZ-WEB-01", "target": "COMP-LAN-101", "relation": "Phishing_Pivot", "base_risk": 3.0, "required_os": "Windows", "required_token": "None"},
+    {"source": "DMZ-PROXY-02", "target": "SRV-HR-DATA", "relation": "Internal_Routing", "base_risk": 2.5, "required_os": "Windows", "required_token": "None"},
+    {"source": "COMP-LAN-101", "target": "COMP-LAN-102", "relation": "SMB_Lateral", "base_risk": 1.0, "required_os": "Windows", "required_token": "None"},
+    {"source": "COMP-LAN-101", "target": "SRV-SQL-PROD", "relation": "Kerberoasting_Vector", "base_risk": 6.0, "required_os": "Windows", "required_token": "Kerberos_Ticket"},
+    {"source": "COMP-LAN-102", "target": "MGMT-LINUX-02", "relation": "SSH_Key_Leak", "base_risk": 2.0, "required_os": "Linux", "required_token": "SSH_Priv_Key"},
+    {"source": "SRV-HR-DATA", "target": "SRV-SQL-PROD", "relation": "DB_Link_Exploit", "base_risk": 4.0, "required_os": "Windows", "required_token": "SQL_Admin_Creds"},
+    {"source": "SRV-SQL-PROD", "target": "MGMT-JUMP-01", "relation": "Token_Impersonation", "base_risk": 5.0, "required_os": "Windows", "required_token": "Local_Admin_Token"},
+    {"source": "MGMT-LINUX-02", "target": "DC-PRIMARY-01", "relation": "LDAP_Relay", "base_risk": 8.5, "required_os": "Windows", "required_token": "None"},
+    {"source": "MGMT-JUMP-01", "target": "DC-PRIMARY-01", "relation": "RDP_Session", "base_risk": 2.0, "required_os": "Windows", "required_token": "Domain_Admin_Creds"},
+    {"source": "DC-PRIMARY-01", "target": "DC-BACKUP-02", "relation": "DCSync_Replication", "base_risk": 1.0, "required_os": "Windows", "required_token": "Domain_Admin_Creds"},
+    {"source": "DC-PRIMARY-01", "target": "OFFLINE-VAULT", "relation": "Physical_Backup_Access", "base_risk": 15.0, "required_os": "Any", "required_token": "Vault_Master_Key"}
+  ]
+}
