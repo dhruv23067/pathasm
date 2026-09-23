@@ -62,42 +62,55 @@ As a result, a path containing more graph edges may receive a lower cumulative m
 
 > **Important:** PathAsm scores are modeling inputs used for comparative path analysis. They should not be interpreted as probabilities of detection or direct measurements of EDR/SIEM visibility. Actual telemetry depends on the environment, defensive configuration, logging policies, and other operational factors.
 
-## Installation Steps and Running Pathasm
+## Installation Steps and Running PathAsm
+
 PathAsm is designed to require minimal setup. Download the latest source release, install the package, and launch the application.
 
-1. Download PathAsm
+### 1. Download PathAsm
 
-Download the latest Source code (ZIP) from the PathAsm GitHub release.
+Download the latest **Source code (ZIP)** from the PathAsm GitHub release.
 
-Extract the downloaded archive to a location of your choice.
+Extract the downloaded ZIP file to a directory of your choice.
+
+### 2. Open the PathAsm Directory
+
+Open **Command Prompt** or **PowerShell** and navigate to the extracted PathAsm directory.
 
 For example:
 
-C:\Tools\PathAsm
-2. Open a Terminal
-
-Open Command Prompt or PowerShell and navigate to the extracted PathAsm directory:
-
+```powershell
 cd C:\Tools\PathAsm
-3. Install PathAsm
+```
+
+> Replace `C:\Tools\PathAsm` with the actual location where you extracted PathAsm.
+
+### 3. Install PathAsm
 
 From inside the PathAsm directory, run:
 
+```powershell
 pip install .
+```
 
-This installs PathAsm and its required Python dependencies.
+This will install PathAsm along with its required Python dependencies.
 
-4. Launch PathAsm
+### 4. Launch PathAsm
 
-Once the installation completes successfully, start PathAsm with:
+After the installation completes successfully, run:
 
+```powershell
 pathasm view
+```
 
-PathAsm will launch the application and provide access to the path-analysis interface.
+PathAsm will start and launch the application.
 
-Quick Start
+### Quick Start
+
+If PathAsm has already been downloaded and extracted, installation and startup require only:
+
+```powershell
 cd C:\Tools\PathAsm
 pip install .
 pathasm view
+```
 
-Note: A supported Python installation with pip must be available on the system before installing PathAsm.
