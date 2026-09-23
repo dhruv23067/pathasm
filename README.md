@@ -62,3 +62,42 @@ As a result, a path containing more graph edges may receive a lower cumulative m
 
 > **Important:** PathAsm scores are modeling inputs used for comparative path analysis. They should not be interpreted as probabilities of detection or direct measurements of EDR/SIEM visibility. Actual telemetry depends on the environment, defensive configuration, logging policies, and other operational factors.
 
+## Installation Steps and Running Pathasm
+PathAsm is designed to require minimal setup. Download the latest source release, install the package, and launch the application.
+
+1. Download PathAsm
+
+Download the latest Source code (ZIP) from the PathAsm GitHub release.
+
+Extract the downloaded archive to a location of your choice.
+
+For example:
+
+C:\Tools\PathAsm
+2. Open a Terminal
+
+Open Command Prompt or PowerShell and navigate to the extracted PathAsm directory:
+
+cd C:\Tools\PathAsm
+3. Install PathAsm
+
+From inside the PathAsm directory, run:
+
+pip install .
+
+This installs PathAsm and its required Python dependencies.
+
+4. Launch PathAsm
+
+Once the installation completes successfully, start PathAsm with:
+
+pathasm view
+
+PathAsm will launch the application and provide access to the path-analysis interface.
+
+Quick Start
+cd C:\Tools\PathAsm
+pip install .
+pathasm view
+
+Note: A supported Python installation with pip must be available on the system before installing PathAsm.
