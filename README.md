@@ -114,3 +114,24 @@ pip install .
 pathasm view
 ```
 
+## PathAsm in Action
+
+PathAsm provides a visual environment for analyzing Active Directory relationships and comparing different paths between selected graph objects. The interface is designed to make path structure, relationship types, and calculated costs easier to inspect and interpret.
+
+### Interactive Path Analysis
+
+PathAsm transforms supported BloodHound / SharpHound relationships into graph objects and applies contextual weights to each relationship. Users can select a source and destination to explore the available paths between them.
+<img width="903" height="313" alt="2" src="https://github.com/user-attachments/assets/b5189527-f10c-40a4-955f-408104013b33" />
+
+### Shortest vs. Weighted Path
+
+PathAsm evaluates paths using two approaches: a traditional shortest path, which minimizes hop count, and a weighted path, which minimizes the cumulative modeled cost of the relationships along the route.
+
+This comparison helps highlight situations where the structurally shortest path differs from the path produced by PathAsm's contextual scoring model.
+<img width="1850" height="1027" alt="3" src="https://github.com/user-attachments/assets/020ac1b2-d1d2-4783-afd2-ffef3fa32547" />
+
+
+<img width="1852" height="882" alt="4" src="https://github.com/user-attachments/assets/83f898b2-8e5b-4865-a3f8-8a5277a03b5c" />
+
+
+
